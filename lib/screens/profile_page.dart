@@ -1,11 +1,23 @@
+// profile_page.dart
 import 'package:flutter/material.dart';
+import 'auth_page.dart'; // Import the AuthPage
+import 'settings_page.dart'; // Import the SettingsPage
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String username = 'Сергей Большаков'; // Default username
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Профиль'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -15,28 +27,60 @@ class ProfilePage extends StatelessWidget {
             const CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(
-                'https://example.com/profile-picture-url', // Replace with your own image URL
+                'https://cdn-icons-png.flaticon.com/128/1077/1077063.png',
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Name: John Doe',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              username, // Use the dynamic username
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              'Email: johndoe@example.com',
+              'Email: sergeybolshakov@gmail.com',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+              onPressed: () async {
+                // Navigate to the SettingsPage and wait for the result
+                final result = await Navigator.of(context).push<String>(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                );
+
+                // If a new username was returned, update the state
+                if (result != null && result.isNotEmpty) {
+                  setState(() {
+                    username = result;
+                  });
+                }
+              },
+              child: const Text('Редактировать профиль'),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Адрес пункта выдачи:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Введите адрес пункта выдачи',
+                hintText: 'Например, ул. Ленина, 10',
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
               onPressed: () {
-                // Add functionality for editing the profile or logging out
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Edit Profile tapped')),
+                // Log out and navigate to the AuthPage
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const AuthPage()),
                 );
               },
-              child: const Text('Edit Profile'),
+              child: const Text('Выйти'),
             ),
           ],
         ),

@@ -22,20 +22,21 @@ class BookDetailsPage extends StatelessWidget {
             Image.network(book.coverImageUrl, height: 200),
             SizedBox(height: 16),
             Text(book.title, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            Text('by ${book.author}', style: TextStyle(fontSize: 16, color: Colors.grey)),
+            Text('${book.author}', style: TextStyle(fontSize: 16, color: Colors.grey)),
+            Text(book.genre, style: TextStyle(fontSize: 16, color: Colors.black, fontStyle: FontStyle.italic)),
             SizedBox(height: 16),
             Text(book.description),
             SizedBox(height: 16),
-            Text('\$${book.price.toString()}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text('${book.price.toString()} ₽', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             Spacer(),
             ElevatedButton(
               onPressed: () {
                 cartProvider.addBook(book);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Added to cart!')),
+                  SnackBar(content: Text('Добавлено к корзину!')),
                 );
               },
-              child: Text('Add to Cart'),
+              child: Text('Добавить в корзину'),
             ),
           ],
         ),

@@ -8,7 +8,7 @@ class CartPage extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Cart')),
+      appBar: AppBar(title: const Text('Корзина')),
       body: Column(
         children: [
           Expanded(
@@ -18,9 +18,9 @@ class CartPage extends StatelessWidget {
                 final book = cartProvider.cart[index];
                 return ListTile(
                   title: Text(book.title),
-                  subtitle: Text('\$${book.price.toString()}'),
+                  subtitle: Text('${book.price.toString()} ₽'),
                   trailing: IconButton(
-                    icon: Icon(Icons.remove),
+                    icon: const Icon(Icons.remove),
                     onPressed: () {
                       cartProvider.removeBook(book);
                     },
@@ -29,12 +29,32 @@ class CartPage extends StatelessWidget {
               },
             ),
           ),
-          Divider(),
-          Text('Total: \$${cartProvider.totalPrice.toString()}'),
-          SizedBox(height: 16),
+          const Divider(),
+          Text('Сумма: ${cartProvider.totalPrice.toString()} ₽'),
+          const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () {}, // Placeholder for checkout
-            child: Text('Proceed to Checkout'),
+            onPressed: () {
+              // Clear the cart and show a pop-up window
+              cartProvider.clearCart();
+
+              // Show success dialog
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Успех'),
+                  content: const Text('Покупка прошла успешно!'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: const Text('ОК'),
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: const Text('Оформить покупку'),
           ),
         ],
       ),

@@ -17,4 +17,9 @@ class CartProvider with ChangeNotifier {
     _cart.remove(book);
     notifyListeners();
   }
+
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
 }
