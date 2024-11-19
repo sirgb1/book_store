@@ -11,8 +11,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String username = 'Сергей Большаков'; // Default username
-  String selectedPickupPoint = pickupPoints[0]; // Default selected pickup point
+  String username = 'Сергей Большаков';
+  String selectedPickupPoint = pickupPoints[0];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Picture
             Center(
               child: CircleAvatar(
                 radius: 50,
@@ -38,10 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 20),
 
-            // Username
             Center(
               child: Text(
-                username, // Dynamic username
+                username,
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -51,7 +49,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 10),
 
-            // Email
             Center(
               child: Text(
                 'Email: sergeybolshakov@gmail.com',
@@ -63,24 +60,21 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 30),
 
-            // Edit Profile Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF8D6E63), // Consistent button color
+                backgroundColor: const Color(0xFF8D6E63),
                 padding: const EdgeInsets.symmetric(vertical: 14.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
               onPressed: () async {
-                // Navigate to the SettingsPage and wait for the result
                 final result = await Navigator.of(context).push<String>(
                   MaterialPageRoute(
                     builder: (context) => const SettingsPage(),
                   ),
                 );
 
-                // If a new username was returned, update the state
                 if (result != null && result.isNotEmpty) {
                   setState(() {
                     username = result;
@@ -96,7 +90,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 20),
 
-            // Pickup Point Label
             const Text(
               'Адрес пункта выдачи:',
               style: TextStyle(
@@ -107,7 +100,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 10),
 
-            // Dropdown for Pickup Points
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               decoration: BoxDecoration(
@@ -117,8 +109,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: DropdownButton<String>(
                 value: selectedPickupPoint,
-                isExpanded: true, // Full width
-                underline: Container(), // Remove default underline
+                isExpanded: true,
+                underline: Container(),
                 items: pickupPoints.map((String point) {
                   return DropdownMenuItem<String>(
                     value: point,
@@ -137,17 +129,15 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 30),
 
-            // Logout Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF451407), // Consistent button color
+                backgroundColor: const Color(0xFF451407),
                 padding: const EdgeInsets.symmetric(vertical: 14.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
               onPressed: () {
-                // Log out and navigate to the AuthPage
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const AuthPage()),
                 );

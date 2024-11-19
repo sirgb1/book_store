@@ -12,13 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0; // Track the current index for the BottomNavigationBar
+  int _currentIndex = 0;
 
-  // Pages to switch between
+
   final List<Widget> _pages = [
-    BookListPage(), // Home Page content
+    BookListPage(),
     CartPage(),
-    ProfilePage(), // Profile Page
+    ProfilePage(),
   ];
 
   @override
@@ -32,23 +32,23 @@ class _HomePageState extends State<HomePage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.brown[700], // Warm, rich brown color for the AppBar
-        centerTitle: true, // Center the title
+        backgroundColor: Colors.brown[700],
+        centerTitle: true,
       ),
       body: Container(
-        color: Colors.brown[50], // Soft, beige-like background color for warmth
-        child: _pages[_currentIndex], // Display the current page
+        color: Colors.brown[50],
+        child: _pages[_currentIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex, // Current selected index
+        currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            _currentIndex = index; // Update index when tapped
+            _currentIndex = index;
           });
         },
-        backgroundColor: Colors.brown[100], // Light brown background for the BottomNavigationBar
-        selectedItemColor: Colors.brown[800], // Dark brown color for selected items
-        unselectedItemColor: Colors.brown[400], // Lighter brown for unselected items
+        backgroundColor: Colors.brown[100],
+        selectedItemColor: Colors.brown[800],
+        unselectedItemColor: Colors.brown[400],
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Корзина'),
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// Modified BookListPage to include the search bar and search functionality
+
 class BookListPage extends StatefulWidget {
   @override
   _BookListPageState createState() => _BookListPageState();
@@ -71,7 +71,6 @@ class _BookListPageState extends State<BookListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Filter books based on the search query
     final filteredBooks = dummyBooks
         .where((book) => book.title.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
@@ -89,12 +88,12 @@ class _BookListPageState extends State<BookListPage> {
             },
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.brown[100], // Light brown fill color
+              fillColor: Colors.brown[100],
               hintText: 'Поиск книг по названию...',
               prefixIcon: const Icon(Icons.search, color: Colors.brown),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // Rounded corners
-                borderSide: BorderSide.none, // Remove the border
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: BorderSide.none,
               ),
             ),
           ),
@@ -103,10 +102,10 @@ class _BookListPageState extends State<BookListPage> {
           child: GridView.builder(
             padding: const EdgeInsets.all(8.0),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // Number of columns
-              crossAxisSpacing: 8.0, // Spacing between columns
-              mainAxisSpacing: 8.0, // Spacing between rows
-              childAspectRatio: 0.65, // Aspect ratio for the grid items
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 0.65,
             ),
             itemCount: filteredBooks.length,
             itemBuilder: (ctx, index) {
@@ -120,10 +119,10 @@ class _BookListPageState extends State<BookListPage> {
                   );
                 },
                 child: Card(
-                  color: Colors.brown[50], // Soft background for the Card
+                  color: Colors.brown[50],
                   elevation: 4.0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

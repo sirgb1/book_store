@@ -16,12 +16,12 @@ class BookDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           book.title,
-          style: const TextStyle(color: Colors.white), // AppBar text color
+          style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF6D4C41), // Cozy dark brown color
+        backgroundColor: const Color(0xFF6D4C41),
       ),
       body: Container(
-        color: const Color(0xFFFFF3E0), // Warm, soft beige background
+        color: const Color(0xFFFFF3E0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -39,13 +39,12 @@ class BookDetailsPage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // Title with conditional color
               Text(
                 book.title,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87, // Warm black for readability
+                  color: Colors.black87,
                 ),
               ),
               Text(
@@ -53,14 +52,14 @@ class BookDetailsPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.brown,
-                  fontStyle: FontStyle.italic,
+                  // fontStyle: FontStyle.italic,
                 ),
               ),
               Text(
                 book.genre,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF8D6E63), // Warm brown shade
+                  color: Color(0xFF8D6E63),
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -70,7 +69,7 @@ class BookDetailsPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black54,
-                  height: 1.5, // Increase line height for better readability
+                  height: 1.5,
                 ),
               ),
               const SizedBox(height: 16),
@@ -79,11 +78,10 @@ class BookDetailsPage extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF4E342E), // Rich dark brown
+                  color: Color(0xFF4E342E),
                 ),
               ),
 
-              // If the book is not in stock, display a message
               if (!book.inStock)
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0),
@@ -99,27 +97,25 @@ class BookDetailsPage extends StatelessWidget {
 
               const Spacer(),
 
-              // "Добавить в корзину" button
+
               ElevatedButton(
                 onPressed: () {
                   if (book.inStock) {
-                    // Add to cart if the book is in stock
                     cartProvider.addBook(book);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Добавлено к корзину!'),
-                        backgroundColor: Color(0xFF6D4C41), // Dark brown background
+                        backgroundColor: Color(0xFF6D4C41),
                       ),
                     );
                   } else {
-                    // Show a popup if the book is not in stock
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        backgroundColor: const Color(0xFFFFF8E1), // Light beige background
+                        backgroundColor: const Color(0xFFFFF8E1),
                         title: const Text(
                           'Недоступно',
-                          style: TextStyle(color: Color(0xFF4E342E)), // Dark brown title color
+                          style: TextStyle(color: Color(0xFF4E342E)),
                         ),
                         content: const Text(
                           'Книга не в наличии и не может быть добавлена в корзину.',
@@ -130,7 +126,7 @@ class BookDetailsPage extends StatelessWidget {
                             onPressed: () => Navigator.of(context).pop(),
                             child: const Text(
                               'ОК',
-                              style: TextStyle(color: Color(0xFF6D4C41)), // Dark brown button text
+                              style: TextStyle(color: Color(0xFF6D4C41)),
                             ),
                           ),
                         ],
@@ -139,7 +135,7 @@ class BookDetailsPage extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF8D6E63), // Warm brown button color
+                  backgroundColor: const Color(0xFF8D6E63),
                   padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),

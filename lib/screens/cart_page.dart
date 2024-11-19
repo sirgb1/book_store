@@ -18,7 +18,7 @@ class CartPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Title
-            Text(
+            const Text(
               'Ваши книги',
               style: TextStyle(
                 fontSize: 24,
@@ -40,7 +40,7 @@ class CartPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade300),
                       borderRadius: BorderRadius.circular(8.0),
-                      color: Colors.white, // Background color for book item
+                      color: Colors.white,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +51,7 @@ class CartPage extends StatelessWidget {
                           children: [
                             Text(
                               book.title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
@@ -66,7 +66,6 @@ class CartPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // Remove button
                         IconButton(
                           icon: Icon(Icons.remove, color: Colors.red),
                           onPressed: () {
@@ -83,7 +82,6 @@ class CartPage extends StatelessWidget {
             const Divider(thickness: 1.5),
             const SizedBox(height: 8),
 
-            // Total Price
             Text(
               'Сумма: ${cartProvider.totalPrice.toString()} ₽',
               style: const TextStyle(
@@ -93,10 +91,9 @@ class CartPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Checkout Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4C5E0F), // Consistent button color
+                backgroundColor: const Color(0xFF4C5E0F),
                 padding: const EdgeInsets.symmetric(vertical: 14.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -105,7 +102,6 @@ class CartPage extends StatelessWidget {
               onPressed: () {
                 cartProvider.clearCart();
 
-                // Show success dialog
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(

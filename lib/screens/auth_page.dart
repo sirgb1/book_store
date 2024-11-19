@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Import your HomePage
-import 'signup_page.dart'; // Import the SignUpPage
+import 'home_page.dart';
+import 'signup_page.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -190,7 +190,6 @@ class __FormContentState extends State<_FormContent> {
             const SizedBox(height: 10),
             TextButton(
               onPressed: () {
-                // Navigate to SignUpPage
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const SignUpPage()),
                 );
