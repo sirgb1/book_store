@@ -5,6 +5,7 @@ class Book {
   final double price;
   final String coverImageUrl;
   final String description;
+  final bool inStock;
 
   Book({
     required this.title,
@@ -13,5 +14,6 @@ class Book {
     required this.price,
     required this.coverImageUrl,
     required this.description,
+    required this.inStock
   });
 }

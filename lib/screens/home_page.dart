@@ -25,9 +25,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('КНИГОГРАД'),
+        title: const Text(
+          'КНИГОГРАД',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.brown[700], // Warm, rich brown color for the AppBar
+        centerTitle: true, // Center the title
       ),
-      body: _pages[_currentIndex], // Display the current page
+      body: Container(
+        color: Colors.brown[50], // Soft, beige-like background color for warmth
+        child: _pages[_currentIndex], // Display the current page
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex, // Current selected index
         onTap: (index) {
@@ -35,6 +46,9 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = index; // Update index when tapped
           });
         },
+        backgroundColor: Colors.brown[100], // Light brown background for the BottomNavigationBar
+        selectedItemColor: Colors.brown[800], // Dark brown color for selected items
+        unselectedItemColor: Colors.brown[400], // Lighter brown for unselected items
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Корзина'),
@@ -73,10 +87,15 @@ class _BookListPageState extends State<BookListPage> {
                 _searchQuery = value;
               });
             },
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.brown[100], // Light brown fill color
               hintText: 'Поиск книг по названию...',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.search, color: Colors.brown),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                borderSide: BorderSide.none, // Remove the border
+              ),
             ),
           ),
         ),
@@ -101,15 +120,22 @@ class _BookListPageState extends State<BookListPage> {
                   );
                 },
                 child: Card(
+                  color: Colors.brown[50], // Soft background for the Card
                   elevation: 4.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Image.network(
-                          book.coverImageUrl,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.vertical(top: Radius.circular(10.0)),
+                          child: Image.network(
+                            book.coverImageUrl,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
                         ),
                       ),
                       Padding(
@@ -119,6 +145,7 @@ class _BookListPageState extends State<BookListPage> {
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.0,
+                            color: Colors.black,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -128,7 +155,9 @@ class _BookListPageState extends State<BookListPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           book.author,
-                          style: const TextStyle(color: Colors.grey),
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
